@@ -73,18 +73,9 @@ while True:
         connectionSocket.close() 
     
     except IOError:
-        theError = sys.exc_info()[1]
-        fileError = open("error404.html")
-        fileErrorData = fileError.read()
-        connectionSocket.send('HTTP/1.1 404 Not Found\r\n\r\n'.encode())
-    
-        for i in range(0, len(fileErrorData)):
-            connectionSocket.send(fileErrorData[i].encode())
+        connectionSocket.send('\nHTTP/1.1 404 Not Found\r\n\r\n'.encode())
+        connectionSocket.send(b'<html><body><h1>Error 404: File Not Found</h1> Do not come around here no more</body></html>')
         connectionSocket.send("\r\n".encode())
-        fileError.close()
-        #Send HTTP response message for file not found
-        #FillInStart
-        #FillInEnd 
         
         #Close client socket 
         connectionSocket.close()
